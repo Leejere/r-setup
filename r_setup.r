@@ -47,11 +47,18 @@ plot_theme <- function(title_size = 12, subtitle_size = 10.5, label_size = 10, t
 
 # Customize x labels
 x_label_unit = function(typical_scale){
-  
   if(typical_scale > 1000000){
     scale_x_continuous(labels = label_number(suffix = "M", scale = 1e-6))
   }else if(typical_scale > 1000){
     scale_x_continuous(labels = label_number(suffix = "K", scale = 1e-3))
+  }
+}
+
+y_label_unit = function(typical_scale){
+  if(typical_scale > 1000000){
+    scale_y_continuous(labels = label_number(suffix = "M", scale = 1e-6))
+  }else if(typical_scale > 1000){
+    scale_y_continuous(labels = label_number(suffix = "K", scale = 1e-3))
   }
 }
 
