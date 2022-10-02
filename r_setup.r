@@ -36,7 +36,7 @@ green = "#7cbfa4"
 palette = read.csv("https://raw.githubusercontent.com/Leejere/python-visualization-preset/main/palette.csv")
 
 windowsFonts(font = windowsFont('Open Sans'))
-plotTheme <- function(base_size = 9, title_size = 10){
+plotTheme <- function(base_size = 10, title_size = 12){
   theme(
     text = element_text(family = 'font', color = "black"),
     plot.title = element_text(family = 'font',
@@ -48,17 +48,17 @@ plotTheme <- function(base_size = 9, title_size = 10){
     panel.background = element_blank(),
     panel.grid.major = element_line("grey80", size = 0.01),
     panel.grid.minor = element_blank(),
-    panel.border = element_rect(colour = "black", fill=NA, size=.5),
+    panel.border = element_blank(),
     strip.background = element_blank(),
-    strip.text = element_text(family = 'font', size=9),
-    axis.title = element_text(family = 'font', size=9),
-    axis.text = element_text(family = 'font', size=7),
-    axis.text.y = element_text(family = 'font', size=7),
+    strip.text = element_text(family = 'font', size=10),
+    axis.title = element_text(family = 'font', size=10),
+    axis.text = element_text(family = 'font', size=8.5),
+    axis.text.y = element_text(family = 'font', size=8.5),
     plot.background = element_blank(),
     legend.background = element_blank(),
-    legend.title = element_text(family = 'font', colour = "black", face = "italic", size = 9),
-    legend.text = element_text(family = 'font', colour = "black", face = "italic", size = 7),
-    strip.text.x = element_text(family = 'font', size = 9),
+    legend.title = element_text(family = 'font', colour = "black", face = "italic", size = 10),
+    legend.text = element_text(family = 'font', colour = "black", face = "italic", size = 8.5),
+    strip.text.x = element_text(family = 'font', size = 10),
     legend.key.size = unit(.5, 'line')
   )
 }
