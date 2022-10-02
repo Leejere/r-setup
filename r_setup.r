@@ -36,7 +36,7 @@ green = "#7cbfa4"
 palette = read.csv("https://raw.githubusercontent.com/Leejere/python-visualization-preset/main/palette.csv")
 
 windowsFonts(font = windowsFont('Open Sans'))
-plotTheme <- function(base_size = 10, title_size = 12){
+plot_theme <- function(base_size = 10, title_size = 12){
   theme(
     text = element_text(family = 'font', color = "black"),
     plot.title = element_text(family = 'font',
