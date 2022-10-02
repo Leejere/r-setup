@@ -54,6 +54,7 @@ plotTheme <- function(base_size = 10, title_size = 12){
     axis.title = element_text(family = 'font', size=10),
     axis.text = element_text(family = 'font', size=8.5),
     axis.text.y = element_text(family = 'font', size=8.5),
+    axis.line.x = element_line(size = 0.5, linetype = "solid", colour = "black"),
     plot.background = element_blank(),
     legend.background = element_blank(),
     legend.title = element_text(family = 'font', colour = "black", face = "italic", size = 10),
