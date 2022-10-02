@@ -35,11 +35,24 @@ green = "#7cbfa4"
 
 palette = read.csv("https://raw.githubusercontent.com/Leejere/python-visualization-preset/main/palette.csv")
 
-plot_theme <- function(){
+plot_theme <- function(title_size = 12, subtitle_size = 10.5, label_size = 10, tick_size = 8.5){
   theme_minimal() +
-  theme(
-    axis.line.x = element_line(size = 0.5, linetype = "solid", colour = "black"),
-  )
+  theme(axis.text.x = element_text(color = "grey60", size = tick_size),
+        axis.text.y = element_text(color = "grey60", size = tick_size),  
+        axis.title.x = element_text(color = "grey20", size = label_size),
+        axis.title.y = element_text(color = "grey20", size = label_size),
+        plot.title = element_text(color = "gray20", size = title_size),
+        plot.subtitle = element_text(color = "gray40", size = subtitle_size))
+}
+
+# Customize x labels
+x_label_unit = function(typical_scale){
+  
+  if(typical_scale > 1000000){
+    scale_x_continuous(labels = label_number(suffix = "M", scale = 1e-6))
+  }else if(typical_scale > 1000){
+    scale_x_continuous(labels = label_number(suffix = "K", scale = 1e-3))
+  }
 }
 
 map_theme <- function(){
