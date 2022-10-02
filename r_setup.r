@@ -36,32 +36,12 @@ green = "#7cbfa4"
 palette = read.csv("https://raw.githubusercontent.com/Leejere/python-visualization-preset/main/palette.csv")
 
 plot_theme <- function(base_size = 10, title_size = 12){
+  theme_minimal() +
   theme(
-    text = element_text(family = 'font', color = "black"),
-    plot.title = element_text(family = 'font',
-                              size = title_size, colour = "black", hjust = 0.5), 
-    plot.subtitle = element_text(family = 'font', face = 'italic',
-                                 size = base_size, colour = "black", hjust = 0.5),
-    plot.caption = element_text(family = 'font', hjust=0),
-    axis.ticks = element_blank(),
-    panel.background = element_blank(),
-    panel.grid.major = element_line("grey90", size = 0.01),
-    panel.grid.minor = element_blank(),
-    panel.border = element_blank(),
-    strip.background = element_blank(),
-    strip.text = element_text(size=10.5),
-    axis.title = element_text(size=10.5),
-    axis.text = element_text(size=8.5),
     axis.line.x = element_line(size = 0.5, linetype = "solid", colour = "black"),
-    axis.line.y = element_blank(),
-    plot.background = element_blank(),
-    legend.background = element_blank(),
-    legend.title = element_text(colour = "black", size = 10.5),
-    legend.text = element_text(colour = "black", size = 8.5),
-    strip.text.x = element_text(size = 10.5),
-    legend.key.size = unit(.5, 'line')
   )
 }
+
 map_theme <- function(base_size = 9, title_size = 10){
   theme(
     text = element_text(family = 'font', color = "black"),
