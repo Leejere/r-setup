@@ -35,14 +35,15 @@ green = "#7cbfa4"
 
 palette = read.csv("https://raw.githubusercontent.com/Leejere/python-visualization-preset/main/palette.csv")
 
-plot_theme <- function(base_size = 10, title_size = 12){
+plot_theme <- function(){
   theme_minimal() +
   theme(
     axis.line.x = element_line(size = 0.5, linetype = "solid", colour = "black"),
   )
 }
 
-map_theme <- function(base_size = 9, title_size = 10){
+map_theme <- function(){
+  theme_minimal() +
   theme(
     text = element_text(family = 'font', color = "black"),
     plot.title = element_text(family = 'font',
@@ -91,4 +92,16 @@ spatial_identify = function(identifiable, # sf, to be identified against region
             is.na(identified[[paste0(identifier_name)]]), 
             "other")
   return(identified)
+}
+
+# Get the specific color values
+for(column in colnames(palette[2:4])){
+  assign(paste0("palette_", column), palette[[paste0(column)]])
+  for(row in palette[["role"]]){
+    if(column == "regular") {
+      assign(paste0("palette_", row), palette[palette$role == row,][[paste0(column)]])
+    } else {
+      assign(paste0("palette_", row, "_", column), palette[palette$role == row,][[paste0(column)]])
+    }
+  }
 }
