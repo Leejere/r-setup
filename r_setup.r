@@ -63,31 +63,21 @@ y_label_unit = function(typical_scale){
   }
 }
 
-map_theme <- function(){
+map_theme <- function(title_size = 12, subtitle_size = 10.5, label_size = 10, tick_size = 8.5){
   theme_minimal() +
-  theme(
-    text = element_text(family = 'font', color = "black"),
-    plot.title = element_text(family = 'font',
-                              size = title_size, colour = "black", hjust = 0.5), 
-    plot.subtitle = element_text(family = 'font', face = 'italic',
-                                 size = base_size, colour = "black", hjust = 0.5),
-    plot.caption = element_text(family = 'font', hjust=0),
-    axis.ticks = element_blank(),
-    panel.background = element_blank(),
-    panel.grid.major = element_blank(),
-    panel.grid.minor = element_blank(),
-    panel.border = element_blank(),
-    strip.background = element_blank(),
-    strip.text = element_text(size=base_size),
-    axis.title = element_text(family = 'font', size=9),
-    axis.text = element_blank(),
-    axis.text.y = element_blank(),
-    plot.background = element_blank(),
-    legend.background = element_blank(),
-    legend.title = element_text(family = 'font', colour = "black", face = "italic", size = 9),
-    legend.text = element_text(family = 'font', colour = "black", face = "italic", size = 7),
-    strip.text.x = element_text(size=base_size),
-    legend.key.size = unit(.5, 'line')
+  theme(plot.title = element_text(color = "gray20", size = title_size),
+        plot.subtitle = element_text(color = "gray40", size = subtitle_size),
+        axis.ticks = element_blank(),
+        panel.background = element_blank(),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        axis.title = element_blank(),
+        axis.text = element_blank(),
+        axis.text = element_blank(),
+        legend.background = element_blank(),
+        legend.title = element_text(size = label_size),
+        legend.text = element_text(size = tick_size),
+        legend.key.size = unit(.5, 'line')
   )
 }
 
