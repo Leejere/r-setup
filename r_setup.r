@@ -73,7 +73,6 @@ map_theme <- function(title_size = 12, subtitle_size = 10.5, label_size = 10, ti
         panel.grid.minor = element_blank(),
         axis.title = element_blank(),
         axis.text = element_blank(),
-        axis.text = element_blank(),
         legend.background = element_blank(),
         legend.title = element_text(size = label_size),
         legend.text = element_text(size = tick_size),
