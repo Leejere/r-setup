@@ -83,25 +83,58 @@ map_theme <- function(title_size = 12, subtitle_size = 10.5, label_size = 10, ti
 # identify small object against region: which region does the small object lie in
 spatial_identify = function(identifiable, # sf, to be identified against region
                             identifier, # sf, region
-                            key_column, # the key column of the sf to be identified
-                            identifier_name # the column of the region sf to be transferred into the identified sf
+                            identifier_name, # the column of the region sf to be transferred into the identified sf
+                            clip = FALSE,
+                            remove = FALSE
 ){
-  identified = 
-    identifiable %>% 
-    left_join(., # The original sf
-              
-              # Below, create a table (not sf) that has every entry in Identifiable identified by the identifier
-              st_join(identifiable %>% st_centroid() %>% dplyr::select(paste0(key_column)),
-                      identifier %>% dplyr::select(paste0(identifier_name)),
-                      join = st_within) %>%
-                st_drop_geometry(), # Make this a pure table
-              by = key_column
-    )
-  identified[[paste0(identifier_name)]] = 
-    replace(identified[[paste0(identifier_name)]], 
-            is.na(identified[[paste0(identifier_name)]]), 
-            "other")
-  return(identified)
+  
+  # Add a temporary ID column. Make the name of this column long to avoid conflict with any possible existing columns
+  identifiable$temp_id_for_identification = seq.int(nrow(identifiable))
+  
+  # If Identifier_name == "", it means there is no particular column information to be joined
+  # Then, we add an identifier name to all the shapes of the identifier
+  if(missing(identifier_name)) {
+    identifier_name = "temp_identifier_name"
+    identifier$temp_identifier_name = "Within"
+  }
+  
+  # Make a table: each row in identifiable to be identified against the identifier
+  identified = identifiable %>%
+    st_centroid() %>% # Use CENTROID to identify
+    dplyr::select(temp_id_for_identification) %>%
+    st_join(identifier %>% dplyr::select(paste0(identifier_name)),
+            join = st_within) %>%
+    st_drop_geometry() # Make this a pure table without sf
+  
+  # Join information back
+  identified_sf = identifiable %>% # Original sf
+    left_join(.,
+              identified,
+              by = "temp_id_for_identification") %>%
+    dplyr::select(-temp_id_for_identification) # Remove the temp column used in the process
+  
+  # Those not joined: Other
+  identified_sf[[paste0(identifier_name)]] = 
+    replace(identified_sf[[paste0(identifier_name)]],
+            is.na(identified_sf[[paste0(identifier_name)]]),
+            "Other")
+  
+  # If clip is TRUE, the remove all the rows that are "Other"
+  if(clip == TRUE){
+    identified_sf = identified_sf %>%
+      filter(., identified_sf[[paste0(identifier_name)]] != "Other")
+  }
+  
+  # Whether to remove the new columns after clip
+  # Remove if: either remove is TRUE, or when clip is TRUE and remove is missing
+  if((remove == TRUE) | 
+     ((missing(remove)) & (clip == TRUE))
+  ) {
+    identified_sf = identified_sf %>%
+      dplyr::select(-paste0(identifier_name))
+  }
+  
+  return(identified_sf)
 }
 
 # Get the specific color values
