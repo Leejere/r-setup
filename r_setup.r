@@ -23,6 +23,19 @@ library(sjPlot)
 library(sjmisc)
 library(sjlabelled)
 library(mapview)
+
+# Some other libraries to be used
+library(Hmisc)
+library(rgeoda)
+library(BAMMtools)
+library(DAAG)
+library(car)  #to calculate VIF
+library(MASS)
+library(rsq)
+
+# A 5-scale palette based off of the hero palette color
+palette_blue_5 = list('#ffffff', '#c6c7eb', '#8e8fd7', '#5557c3', '#353797')
+
 census_api_key("c16daad4da8c67d74b58b082c036a84ba5a7d861", overwrite = TRUE)
 crs = 'EPSG:2272' # State Plain
 options(scipen = 999)
