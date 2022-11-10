@@ -98,7 +98,8 @@ spatial_identify = function(identifiable, # sf, to be identified against region
                             identifier, # sf, region
                             identifier_name, # the column of the region sf to be transferred into the identified sf
                             clip = FALSE,
-                            remove = FALSE
+                            remove = FALSE,
+                            other = "Other"
 ){
   
   # Add a temporary ID column. Make the name of this column long to avoid conflict with any possible existing columns
@@ -130,12 +131,12 @@ spatial_identify = function(identifiable, # sf, to be identified against region
   identified_sf[[paste0(identifier_name)]] = 
     replace(identified_sf[[paste0(identifier_name)]],
             is.na(identified_sf[[paste0(identifier_name)]]),
-            "Other")
+            other)
   
   # If clip is TRUE, the remove all the rows that are "Other"
   if(clip == TRUE){
     identified_sf = identified_sf %>%
-      filter(., identified_sf[[paste0(identifier_name)]] != "Other")
+      filter(., identified_sf[[paste0(identifier_name)]] != other)
   }
   
   # Whether to remove the new columns after clip
